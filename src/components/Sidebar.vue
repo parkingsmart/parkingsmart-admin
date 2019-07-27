@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       routers: [
-        { id: "user", navIcon: "tachometer-alt", path: "/user" }
+        { id: "about", navIcon: "tachometer-alt", path: "/about" }
       ]
     };
   }
@@ -46,5 +46,9 @@ export default {
 <style lang="scss" scoped>
 .menu-item svg {
   padding: 0 15px;
+}
+
+.menu-item {
+  text-align: left;
 }
 </style>
