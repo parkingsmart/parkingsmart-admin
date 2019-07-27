@@ -2,7 +2,7 @@
   <div class="nav-container">
     <el-breadcrumb separator="/">
       <transition-group name="breadcrumb">
-        <el-breadcrumb-item v-for="item in items" :key="item.path" :to="item.path">{{item.meta.id}}</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="item in items" :key="item.path" :to="item">{{item.meta.id}}</el-breadcrumb-item>
       </transition-group>
     </el-breadcrumb>
     <div class="btn-container">
