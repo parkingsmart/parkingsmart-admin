@@ -2,20 +2,17 @@
   <div class="nav-container">
     <el-breadcrumb separator="/">
       <transition-group name="breadcrumb">
-        <el-breadcrumb-item 
-          v-for="item in items" 
-          :key="item.path"
-          :to="item.path"
-        >
-          {{item.meta.id}}
-        </el-breadcrumb-item>
+        <el-breadcrumb-item v-for="item in items" :key="item.path" :to="item.path">{{item.meta.id}}</el-breadcrumb-item>
       </transition-group>
     </el-breadcrumb>
     <div class="btn-container">
       <div class="avatar-container">
         <el-dropdown trigger="click">
           <div>
-            <img class="user-avatar able" src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80">
+            <img
+              class="user-avatar able"
+              src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
+            />
             <font-awesome-icon class="icon able" icon="angle-down" />
           </div>
           <el-dropdown-menu slot="dropdown">
@@ -30,7 +27,6 @@
 </template>
 
 <script>
-
 export default {
   computed: {
     items: {
@@ -76,7 +72,7 @@ export default {
     align-items: center;
 
     &:hover {
-      background: rgba(0,0,0,.025);
+      background: rgba(0, 0, 0, 0.025);
     }
 
     .user-avatar {
@@ -99,7 +95,7 @@ export default {
 
 .breadcrumb-enter-active,
 .breadcrumb-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .breadcrumb-enter,
@@ -109,7 +105,7 @@ export default {
 }
 
 .breadcrumb-move {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .breadcrumb-leave-active {
