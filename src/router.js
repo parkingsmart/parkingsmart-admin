@@ -25,8 +25,14 @@ export default new Router({
           path: '/about',
           meta: { id: 'about' },
           component: () => import('./views/About.vue')
+        },    
+        {
+          path: '/orderlist',
+          meta: { id: 'orderlist' },
+          component: () => import('./views/OrderPage.vue')
         }
       ]
-    }
+    },
+
   ]
 });

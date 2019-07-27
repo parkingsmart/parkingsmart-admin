@@ -22,7 +22,6 @@
           <span slot="title">{{item.id}}</span>
         </el-menu-item>
       </el-submenu>
-
       <el-menu-item v-else class="menu-item" :index="router.path" :route="{path: router.path}">
         <font-awesome-icon :icon="router.navIcon" />
         <span slot="title">{{router.id}}</span>
@@ -36,7 +35,8 @@ export default {
   data() {
     return {
       routers: [
-        { id: "about", navIcon: "tachometer-alt", path: "/about" }
+        { id: "about", navIcon: "tachometer-alt", path: "/about" },
+        { id: "orderlist", navIcon: "tachometer-alt", path: "/orderlist" }
       ]
     };
   }
