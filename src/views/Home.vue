@@ -3,6 +3,7 @@
     <sidebar class="side-bar"/>
     <div class="main-view">
       <Header />
+      <AppMain />
     </div>
   </div>
 </template>
@@ -10,12 +11,14 @@
 <script>
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
+import AppMain from '@/components/AppMain';
 
 export default {
   name: 'home',
   components: {
     Header,
-    Sidebar
+    Sidebar,
+    AppMain
   }
 };
 </script>
