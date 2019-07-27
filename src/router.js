@@ -25,11 +25,17 @@ export default new Router({
           path: '/about',
           meta: { id: 'about' },
           component: () => import('./views/About.vue')
+
         },    
         {
           path: '/orderlist',
           meta: { id: 'orderlist' },
           component: () => import('./views/OrderPage.vue')
+        },
+        {
+          path: '/parking-lots-management',
+          meta: { id: 'parking-lots-management' },
+          component: () => import('./views/ParkingLotsManagement.vue')
         }
       ]
     },

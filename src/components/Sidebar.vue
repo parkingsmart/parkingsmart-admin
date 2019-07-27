@@ -36,7 +36,8 @@ export default {
     return {
       routers: [
         { id: "about", navIcon: "tachometer-alt", path: "/about" },
-        { id: "orderlist", navIcon: "tachometer-alt", path: "/orderlist" }
+        { id: "orderlist", navIcon: "tachometer-alt", path: "/orderlist" },
+        { id: "停车场管理", navIcon: "tachometer-alt", path: "/parking-lots-management" }
       ]
     };
   }
