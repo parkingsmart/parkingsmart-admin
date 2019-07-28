@@ -1,7 +1,7 @@
 import axios from './base';
 
 const getAllOrders = (page) => {
-    return axios.get('http://localhost:8080/orders',{
+    return axios.get('/api/orders',{
         params: {
         page: page
       }

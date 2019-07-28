@@ -1,6 +1,6 @@
 import axios from './base.js';
 
-const baseUrl = 'http://localhost:8080/users';
+const baseUrl = '/api/users';
 
 const fetchUsers = async () => {
   return axios.get(baseUrl);
