@@ -50,15 +50,15 @@
     </div>
 
     <div class="page-box">
-      <el-pagination 
-        background 
+      <el-pagination
+        background
         :total="count"
-        :page-size="pageSize" 
-        :page-sizes="pageSizes" 
-        :current-page.sync="page" 
-        @current-change="pageChange" 
-        @size-change="pageSizeChange" 
-        layout="sizes, prev, pager, next" 
+        :page-size="pageSize"
+        :page-sizes="pageSizes"
+        :current-page.sync="page"
+        @current-change="pageChange"
+        @size-change="pageSizeChange"
+        layout="sizes, prev, pager, next"
       />
     </div>
   </div>
@@ -114,7 +114,7 @@ export default {
         this.$message.warning('停车员不能管理超过三个停车场');
         this.value = (await userApi.getParkingLotsByUserId(this.expands[0])).map(item => item.id);
         return ;
-      } 
+      }
       if (direction === 'left') {
         await userApi.leavingParkingLots(this.expands[0], movedKeys);
       } else if (this.expands.length){
@@ -134,7 +134,7 @@ export default {
         .filter(parkingLot => !parkingLot.manager || (this.expands.length && parkingLot.manager === this.expands[0]))
         .map(parkingLot => {
           let o = Object.assign({}, parkingLot);
-          o.label = `${parkingLot.name} (${parkingLot.size})`; 
+          o.label = `${parkingLot.name} (${parkingLot.size})`;
           return o;
         });
     }

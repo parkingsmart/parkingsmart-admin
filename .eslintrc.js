@@ -14,7 +14,8 @@ module.exports = {
     'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 1 }],
     "space-infix-ops": ["error", {"int32Hint": true}],
     eqeqeq: ["error", "always"],
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "no-trailing-spaces": "error"
   },
   parserOptions: {
     parser: 'babel-eslint'
