@@ -12,7 +12,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     semi: ["error", "always"],
     'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 1 }],
-    "space-infix-ops": ["error", {"int32Hint": true}]
+    "space-infix-ops": ["error", {"int32Hint": true}],
+    eqeqeq: ["error", "always"]
   },
   parserOptions: {
     parser: 'babel-eslint'
