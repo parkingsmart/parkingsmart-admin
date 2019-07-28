@@ -2,19 +2,22 @@
   <div>
     <div>
       <ParkingLotsHeader @refreshTableData="refreshTableData"></ParkingLotsHeader>
-        <el-table :data="tableData" :row-class-name="tableRowClassName">
-          <el-table-column prop="id" label="id"></el-table-column>
-          <el-table-column prop="name" label="名字"></el-table-column>
-          <el-table-column prop="size" label="大小">
-            <input v-if="isEdit" v-model="sizeInput" style="width:100px" />
-          </el-table-column>
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <el-button size="mini" @click="editParkingLot(scope.$index, scope.row)">{{editBtn}}</el-button>
-              <el-button size="mini" @click="logoutParkingLot(scope.$index, scope.row)">注销</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+      <el-table :data="tableData" :row-class-name="tableRowClassName" :highlight-current-row="true">
+        <el-table-column prop="id" label="id"></el-table-column>
+        <el-table-column prop="name" label="名字"></el-table-column>
+        <el-table-column prop="size" label="大小">
+          <template slot-scope="scope">
+            <input v-if="scope.$index===currIndex" v-model="sizeInput" style="width:100px" />
+            <span v-else>{{ tableData[scope.$index].size }} </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="editParkingLot(scope.$index, scope.row)">{{ (scope.$index===currIndex)? '完成':'修改' }}</el-button>
+            <el-button size="mini" @click="logoutParkingLot(scope.$index, scope.row)">注销</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
       <div class="block">
         <el-pagination
           background
@@ -31,6 +34,7 @@
 import parkingLotApi from "../../apis/parkingLot.js";
 import requestHandler from "../../utils/requestHandler.js";
 import ParkingLotsHeader from "./components/ParkingLotsHeader.vue";
+//import { fips } from 'crypto';
 export default {
   name: "parking-lots-management",
   components: {
@@ -51,11 +55,12 @@ export default {
       sizeInput: "",
       editBtn: "修改",
       totalPage: 0,
-      pageSize: 10
+      pageSize: 10,
+      currIndex: -1
     };
   },
   methods: {
-    tableRowClassName({rowIndex}) {
+    tableRowClassName({ rowIndex }) {
       if (rowIndex === 1) {
         return "warning-row";
       } else if (rowIndex === 3) {
@@ -64,14 +69,18 @@ export default {
       return "";
     },
     editParkingLot(index, data) {
-      if (this.isEdit) {
-        this.isEdit = false;
-        this.tableData[index].size = this.sizeInput;
-        this.editBtn = "修改";
-        this.putAParkingLotInfo(data);
-      } else {
+      if (! this.isEdit) {
         this.isEdit = true;
-        this.editBtn = "完成";
+        this.currIndex = index;
+      } else {
+        this.isEdit = false;
+        this.currIndex = -1;
+        this.tableData[index].size = 0;
+        if(Number.isInteger(this.sizeInput)){
+          this.tableData[index].size = this.sizeInput;
+        }
+        this.putAParkingLotInfo(data);
+        this.sizeInput = "";
       }
     },
     logoutParkingLot(index, data) {
@@ -102,20 +111,11 @@ export default {
 };
 </script>
 <style>
-.warning-row {
-    background:  blue;
-  }
+.el-table .warning-row {
+  background: oldlace;
+}
 
-.success-row {
-    background: #f0f9eb;
-  }
-.parking-lot-logout-status {
-  width: 100%;
-  color: #999;
-  background-color: blue;
+.el-table .success-row {
+  background: #f0f9eb;
 }
-.block {
-  float: right;
-  margin: 20px;
-}
-</style>
+</style>` `
