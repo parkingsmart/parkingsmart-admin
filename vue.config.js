@@ -1,3 +1,9 @@
 module.exports = {
-  publicPath: './'
+  publicPath: './',
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true
+    }
+  }
 };

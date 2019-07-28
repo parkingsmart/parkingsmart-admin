@@ -43,7 +43,6 @@
 import parkingLotApi from "../../apis/parkingLot.js";
 import requestHandler from "../../utils/requestHandler.js";
 import ParkingLotsHeader from "./components/ParkingLotsHeader.vue";
-//import { fips } from 'crypto';
 export default {
   name: "parking-lots-management",
   components: {
@@ -70,11 +69,9 @@ export default {
     };
   },
   methods: {
-    tableRowClassName({ rowIndex }) {
-      if (rowIndex === 1) {
-        return "warning-row";
-      } else if (rowIndex === 3) {
-        return "success-row";
+    tableRowClassName({ row }) {
+      if (row.active === false) {
+        return "log-out-parking-lot";
       }
       return "";
     },
@@ -128,11 +125,7 @@ export default {
 };
 </script>
 <style>
-.el-table .warning-row {
-  background: oldlace;
-}
-
-.el-table .success-row {
-  background: #f0f9eb;
+.el-table .log-out-parking-lot {
+  color:#999;
 }
 </style>` `

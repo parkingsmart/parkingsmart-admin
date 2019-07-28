@@ -54,10 +54,13 @@ import parkingLotApi from "../../../apis/parkingLot.js";
 import requestHandler from "../../../utils/requestHandler.js";
 export default {
   name: "parking-lots-header",
+  props: ["tableData"],
   data() {
     var validateName = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入停车场名字"));
+      } else if (this.isIncluded(value)) {
+        callback(new Error("已存在该停车场"));
       } else {
         callback();
       }
@@ -114,6 +117,15 @@ export default {
     cancelModal(formName) {
       this.$refs[formName].resetFields();
       this.dialogVisible = false;
+    },
+    isIncluded(formName) {
+      let bool = false;
+      this.tableData.forEach(element => {
+        if (element.name === formName) {
+          bool =  true;
+        }
+      });
+       return bool;
     }
   }
 };
