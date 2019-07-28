@@ -1,22 +1,31 @@
 <template>
   <div class="about">
     <el-table
-      :data="tableData.slice((currpage - 1) * pagesize, currpage * pagesize)"
+      :data="orders.slice((currpage - 1) * pagesize, currpage * pagesize)"
       border
-      :highlight-current-row=true
-      style="width: 100%" 
+      :highlight-current-row="true"
+      style="width: 100%"
       :row-style="{'font-size':'14px', height:'65px'}"
       :default-sort="{prop:'id'}"
       :header-cell-style="{color:'black', 'font-size':'16px', 'padding-left':'10px'}"
       :cell-style="{'padding-left':'10px'}"
     >
       <el-table-column prop="id" label="id"></el-table-column>
-      <el-table-column prop="carNumber" label="车牌号"></el-table-column>
-      <el-table-column prop="oprType" label="类型"></el-table-column>
-      <el-table-column prop="status" label="状态"></el-table-column>
+      <el-table-column prop="carNumebr" label="车牌号">
+      </el-table-column>
+      <el-table-column prop="type" label="类型">
+              <template slot-scope="{row}">
+        <span>{{ getType(row.type) }}</span>
+      </template>
+      </el-table-column>
+      <el-table-column prop="status" label="状态">        
+      <template slot-scope="{row}">
+        <span>{{ getStatus(row.status) }}</span>
+      </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="{row}">
-          <el-button type="text" v-if="row.status==='无人处理'">指派</el-button>
+          <el-button type="text" v-if="row.status===0">指派</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -24,45 +33,43 @@
       background
       layout="prev, pager, next"
       @current-change="handleCurrentChange"
-      :total="tableData.length"
+      :total="number"
       :page-size="pagesize"
     ></el-pagination>
   </div>
 </template>
 
 <script>
+import RequestHandler from "../utils/requestHandler";
+import OrderPageApi from "../apis/orderPageApi";
+
 export default {
   name: "OrderPage",
   data() {
     return {
       pagesize: 10,
       currpage: 1,
-      tableData: [
-        {
-          id: "1",
-          carNumber: "粤A123456",
-          oprType: "取车",
-          status: "无人处理"
-        },
-        {
-          id: "2",
-          carNumber: "粤A123456",
-          oprType: "取车",
-          status: "无人处"
-        },
-        {
-          id: "3",
-          carNumber: "粤A123456",
-          oprType: "取车",
-          status: "无人处理"
-        },
-        { id: "4", carNumber: "粤A123456", oprType: "取车", status: "无人处理" }
-      ]
+      orders: [],
+      number: 0
     };
+  },
+  async created() {
+    const response = await RequestHandler.invoke(OrderPageApi.getAllOrders())
+      .loading()
+      .exec();
+    this.orders = response.pageOrders;
+    this.number = response.AllOrdersNum;
+    console.log(response);
   },
   methods: {
     handleCurrentChange(cpage) {
       this.currpage = cpage;
+    },
+    getType(type){
+      return type === 1 ? '取车' : '存车';
+    },
+    getStatus(status){
+      return status === 2 ? '已完成' : status === 1 ? '存取中' : '无人处理';
     }
   }
 };
