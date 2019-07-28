@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <ParkingLotsHeader @refreshTableData="handleAddChange"></ParkingLotsHeader>
+      <ParkingLotsHeader :tableData=tableData @refreshTableData="handleAddChange"></ParkingLotsHeader>
       <el-table :data="tableData" :row-class-name="tableRowClassName" :highlight-current-row="true">
         <el-table-column prop="id" label="id"></el-table-column>
         <el-table-column prop="name" label="名字"></el-table-column>

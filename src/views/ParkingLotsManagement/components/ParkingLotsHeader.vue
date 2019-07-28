@@ -54,7 +54,7 @@ import parkingLotApi from "../../../apis/parkingLot.js";
 import requestHandler from "../../../utils/requestHandler.js";
 export default {
   name: "parking-lots-header",
-  props: ["tableData"],
+  props: ['tableData'],
   data() {
     var validateName = (rule, value, callback) => {
       if (value === "") {
