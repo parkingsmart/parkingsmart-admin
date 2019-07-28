@@ -1,8 +1,9 @@
 <template>
   <div>
-    <el-button @click="dialogFormVisible = true" class="userBtn">Add</el-button>
-
-    <el-dialog title="添加信息" :visible.sync="dialogFormVisible" width='30%' center="true">
+    <div>
+      <el-button @click="dialogFormVisible = true" class="userBtn">Add</el-button>
+    </div>
+    <el-dialog title="添加信息" :visible.sync="dialogFormVisible" width="30%" center="true">
       <el-form>
         <el-form-item label="姓名" :label-width="formLabelWidth">
           <el-input v-model="name" autocomplete="off"></el-input>
@@ -20,6 +21,7 @@
       </div>
     </el-dialog>
 
+    <el-input class="searchUser" v-model="search" size="medium" placeholder="输入关键字搜索" />
     <el-table
       :data="users.slice((currentPage-1)*pagesize,currentPage*pagesize)"
       stripe
@@ -33,10 +35,7 @@
       <el-table-column label="email" prop="email"></el-table-column>
       <el-table-column label="电话号码" prop="phone"></el-table-column>
       <el-table-column label="职业" prop="officeId"></el-table-column>
-      <el-table-column align="right">
-        <template slot="header">
-          <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
-        </template>
+      <el-table-column label="操作" align="left">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">修 改</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">注 销</el-button>
@@ -45,6 +44,7 @@
     </el-table>
 
     <el-pagination
+      style="margin-top:20px"
       background
       layout="prev, pager, next"
       :total="users.length"
@@ -89,36 +89,44 @@ export default {
   methods: {
     handleEdit(index, row) {
       console.log(index, row);
+      this.dialogFormVisible = true;
+      this.name = row.name;
+      this.email= row.email;
+      this.phone = row.phone;
     },
+
     handleDelete(index, row) {
       console.log(index, row);
     },
+
     current_change(currentPage) {
       this.currentPage = currentPage;
     },
     async add() {
-      if(this.name.trim()===""||this.email.trim()===""||this.phone.trim()===""){
+      if (
+        this.name.trim() === "" ||
+        this.email.trim() === "" ||
+        this.phone.trim() === ""
+      ) {
         this.$message({
-          message: '请把信息填写完整',
-          type: 'warning'
+          message: "请把信息填写完整",
+          type: "warning"
         });
-      } else{
+      } else {
         var user = {
-        name: this.name,
-        email: this.email,
-        phone: this.phone
-      };
-      await RequestHadler.invoke(this.$store.dispatch("addUser", user))
-        .msg("添加成功", "添加失败")
-        .loading()
-        .exec();
-      (this.name = ""),
-        (this.email = ""),
-        (this.phone = ""),
-        (this.dialogFormVisible = false);
-
+          name: this.name,
+          email: this.email,
+          phone: this.phone
+        };
+        await RequestHadler.invoke(this.$store.dispatch("addUser", user))
+          .msg("添加成功", "添加失败")
+          .loading()
+          .exec();
+        (this.name = ""),
+          (this.email = ""),
+          (this.phone = ""),
+          (this.dialogFormVisible = false);
       }
-   
     },
     async fetchAll() {
       await this.$store.dispatch("fetchAllUsers");
@@ -128,6 +136,12 @@ export default {
 </script>
 
 <style scoped>
+.searchUser {
+  width: 300px;
+  margin-top: 20px;
+  margin-right: 100px;
+  float: right;
+}
 .userBtn {
   float: left;
   background-color: #409eff;

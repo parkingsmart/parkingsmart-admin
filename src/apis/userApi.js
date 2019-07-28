@@ -6,8 +6,8 @@ const fetchUsers = async () => {
   return axios.get(baseUrl);
 };
 
-const addUser = async (user) => {
-  await axios.post(baseUrl, user);
+const addUser = (user) => {
+  return axios.post(baseUrl, user);
 };
 
 export default {
