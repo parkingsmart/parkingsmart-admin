@@ -26,7 +26,7 @@ export default new Router({
           meta: { id: 'about' },
           component: () => import('./views/About.vue')
 
-        },    
+        },
         {
           path: '/orderlist',
           meta: { id: 'orderlist' },
@@ -36,6 +36,11 @@ export default new Router({
           path: '/parking-lots-management',
           meta: { id: 'parking-lots-management' },
           component: () => import('./views/ParkingLotsManagement/index.vue')
+        },
+        {
+          path: '/users',
+          meta: { id: 'users' },
+          component: () => import('./views/User.vue')
         }
       ]
     },
