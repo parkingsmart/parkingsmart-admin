@@ -10,6 +10,10 @@ const addUser = (user) => {
   return axios.post(baseUrl, user);
 };
 
+const editCareer = async (id,user) => {
+  return axios.put(baseUrl+"/"+id,user);
+};
+
 const getPage = (page, pageSize = 10) => {
   return axios.get(baseUrl, {
     params: {
@@ -34,6 +38,7 @@ const leavingParkingLots = (id, ids) => {
 export default {
   fetchUsers,
   addUser,
+  editCareer,
   getPage,
   getParkingLotsByUserId,
   appointParkingLots,

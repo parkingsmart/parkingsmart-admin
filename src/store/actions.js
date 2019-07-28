@@ -10,4 +10,9 @@ export default {
         await UserApi.addUser(user);
         dispatch('fetchAllUsers');
     },
+
+    editCareer: async ({ dispatch },user) =>{
+        await UserApi.editCareer(user);
+        dispatch('fetchAllUsers');
+    }
 };

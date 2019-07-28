@@ -3,7 +3,7 @@
     <div>
       <el-button @click="dialogFormVisible = true" class="userBtn">Add</el-button>
     </div>
-    <el-dialog title="添加信息" :visible.sync="dialogFormVisible" width="30%" center="true">
+    <el-dialog title="添加信息" :visible.sync="dialogFormVisible" width="30%">
       <el-form>
         <el-form-item label="姓名" :label-width="formLabelWidth">
           <el-input v-model="name" autocomplete="off"></el-input>
@@ -18,6 +18,29 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="add">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="修改职位" :visible.sync="dialogFormVisible1" width="30%">
+      <template>
+        <span>请选择职位：</span>
+        <el-select
+          v-model="officeId"
+          placeholder="请选择"
+          size="medium"
+          style="width:60%"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+      </template>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible1 = false">取 消</el-button>
+        <el-button type="primary" @click="edit">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -54,11 +77,27 @@
 </template>
 <script>
 import RequestHadler from "../utils/requestHandler";
+import userApi from "../../src/apis/userApi";
 export default {
   data() {
     return {
+      options: [
+        {
+          value: "停车员",
+          label: "停车员"
+        },
+        {
+          value: "经理",
+          label: "经理"
+        },
+        {
+          value: "管理员",
+          label: "管理员"
+        }
+      ],
       search: "",
       dialogFormVisible: false,
+      dialogFormVisible1: false,
       name: "",
       email: "",
       phone: "",
@@ -66,7 +105,7 @@ export default {
       total: 1,
       pagesize: 10,
       currentPage: 1,
-
+      id: "",
       formLabelWidth: "80px"
     };
   },
@@ -76,8 +115,10 @@ export default {
       for (var user of users) {
         if (user.officeId === 0) {
           user.officeId = "停车员";
-        } else {
+        } else if (user.officeId === 1) {
           user.officeId = "经理";
+        } else {
+          user.officeId = "管理员";
         }
       }
       return users;
@@ -89,10 +130,37 @@ export default {
   methods: {
     handleEdit(index, row) {
       console.log(index, row);
-      this.dialogFormVisible = true;
+      this.dialogFormVisible1 = true;
+      this.officeId = row.officeId;
       this.name = row.name;
-      this.email= row.email;
+      this.email = row.email;
       this.phone = row.phone;
+      this.id = row.id;
+    },
+
+    async edit() {
+      console.log(this.id);
+      var office;
+      if (this.officeId === "停车员") {
+        office = 0;
+      }
+      if (this.officeId === "经理") {
+        office = 1;
+      }
+
+      if (this.officeId === "管理员") {
+        office = 2;
+      }
+
+      var user = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        officeId: office
+      };
+      await userApi.editCareer(this.id, user);
+      this.$store.dispatch("fetchAllUsers");
+      this.dialogFormVisible1 = false;
     },
 
     handleDelete(index, row) {
