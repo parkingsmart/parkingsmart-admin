@@ -51,8 +51,8 @@
     ></el-pagination>
   </div>
 </template>
-
 <script>
+import RequestHadler from '../utils/requestHandler';
 export default {
   data() {
     return {
@@ -102,7 +102,7 @@ export default {
         phone: this.phone,
       };
       
-      await this.$store.dispatch("addUser", user);
+      await RequestHadler.invoke(this.$store.dispatch("addUser", user)).msg("添加成功","添加失败").loading().exec();
 
       (this.name = ""),
         (this.email = ""),
