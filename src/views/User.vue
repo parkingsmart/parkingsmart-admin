@@ -97,7 +97,13 @@ export default {
       this.currentPage = currentPage;
     },
     async add() {
-      var user = {
+      if(this.name.trim()===""||this.email.trim()===""||this.phone.trim()===""){
+        this.$message({
+          message: '请把信息填写完整',
+          type: 'warning'
+        });
+      } else{
+        var user = {
         name: this.name,
         email: this.email,
         phone: this.phone
@@ -110,6 +116,9 @@ export default {
         (this.email = ""),
         (this.phone = ""),
         (this.dialogFormVisible = false);
+
+      }
+   
     },
     async fetchAll() {
       await this.$store.dispatch("fetchAllUsers");
