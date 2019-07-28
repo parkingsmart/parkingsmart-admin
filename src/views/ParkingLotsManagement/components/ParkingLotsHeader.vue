@@ -2,7 +2,12 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="3">
-        <el-button type="primary" size="medium " class="parking-lots-header-add-btn">新建</el-button>
+        <el-button
+          type="primary"
+          size="medium "
+          @click="dialogVisible = true"
+          class="parking-lots-header-add-btn"
+        >新建</el-button>
       </el-col>
       <el-col :span="8" :offset="13">
         <div class="parking-lots-header-search">
@@ -34,7 +39,9 @@ export default {
       options: [{ value: 1, label: 1 }]
     };
   },
-  methods: {}
+  methods: {
+    
+  }
 };
 </script>
 <style>
