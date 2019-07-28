@@ -1,20 +1,28 @@
 <template>
   <div>
     <div>
-      <ParkingLotsHeader @refreshTableData="refreshTableData"></ParkingLotsHeader>
+      <ParkingLotsHeader @refreshTableData="handleAddChange"></ParkingLotsHeader>
       <el-table :data="tableData" :row-class-name="tableRowClassName" :highlight-current-row="true">
         <el-table-column prop="id" label="id"></el-table-column>
         <el-table-column prop="name" label="名字"></el-table-column>
         <el-table-column prop="size" label="大小">
           <template slot-scope="scope">
             <input v-if="scope.$index===currIndex" v-model="sizeInput" style="width:100px" />
-            <span v-else>{{ tableData[scope.$index].size }} </span>
+            <span v-else>{{ tableData[scope.$index].size }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" :disabled="!scope.row.active" @click="editParkingLot(scope.$index, scope.row)">{{ (scope.$index===currIndex)? '完成':'修改' }}</el-button>
-            <el-button size="mini" :disabled="!scope.row.active" @click="logoutParkingLot(scope.$index, scope.row)">注销</el-button>
+            <el-button
+              size="mini"
+              :disabled="!scope.row.active"
+              @click="editParkingLot(scope.$index, scope.row)"
+            >{{ (scope.$index===currIndex)? '完成':'修改' }}</el-button>
+            <el-button
+              size="mini"
+              :disabled="!scope.row.active"
+              @click="logoutParkingLot(scope.$index, scope.row)"
+            >注销</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -22,8 +30,9 @@
         <el-pagination
           background
           :page-size="pageSize"
-          :total="totalPage"
+          :total="totalItem"
           @current-change="handleCurrentChange"
+          :current-page="currPage"
         ></el-pagination>
       </div>
     </div>
@@ -46,7 +55,7 @@ export default {
       .loading()
       .exec();
     this.tableData = tableData.AllParkingLot;
-    this.totalPage = tableData.AllParkingLotsNum;
+    this.totalItem = tableData.AllParkingLotsNum;
   },
   data() {
     return {
@@ -54,9 +63,10 @@ export default {
       isEdit: false,
       sizeInput: "",
       editBtn: "修改",
-      totalPage: 0,
+      totalItem: 0,
       pageSize: 10,
-      currIndex: -1
+      currIndex: -1,
+      currPage: 0
     };
   },
   methods: {
@@ -69,14 +79,14 @@ export default {
       return "";
     },
     editParkingLot(index, data) {
-      if (! this.isEdit) {
+      if (!this.isEdit) {
         this.isEdit = true;
         this.currIndex = index;
       } else {
         this.isEdit = false;
         this.currIndex = -1;
         this.tableData[index].size = 0;
-        if(Number.isInteger(Number(this.sizeInput))){
+        if (Number.isInteger(Number(this.sizeInput))) {
           this.tableData[index].size = Number(this.sizeInput);
         }
         this.putAParkingLotInfo(data);
@@ -93,19 +103,26 @@ export default {
         .loading()
         .exec();
     },
-    async refreshTableData() {
-      const tableData = await requestHandler
-        .invoke(parkingLotApi.getAll())
-        .loading()
-        .exec();
-      this.tableData = tableData.AllParkingLot;
-    },
+
     async handleCurrentChange(page) {
+      this.currPage = page;
       const tableData = await requestHandler
         .invoke(parkingLotApi.getAll(page))
         .loading()
         .exec();
       this.tableData = tableData.AllParkingLot;
+      this.totalItem = tableData.AllParkingLotsNum;
+    },
+    async handleAddChange() {
+      const tableData = await requestHandler
+        .invoke(
+          parkingLotApi.getAll(Math.ceil((this.totalItem + 1) / this.pageSize))
+        )
+        .loading()
+        .exec();
+      this.currPage = Math.ceil((this.totalItem + 1) / this.pageSize);
+      this.tableData = tableData.AllParkingLot;
+      this.totalItem = tableData.AllParkingLotsNum;
     }
   }
 };
