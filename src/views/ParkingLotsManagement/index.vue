@@ -79,6 +79,7 @@ export default {
       if (!this.isEdit) {
         this.isEdit = true;
         this.currIndex = index;
+        this.sizeInput = this.tableData[index].size;
       } else {
         this.isEdit = false;
         this.currIndex = -1;

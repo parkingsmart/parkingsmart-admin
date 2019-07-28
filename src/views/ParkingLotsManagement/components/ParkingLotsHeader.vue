@@ -122,7 +122,7 @@ export default {
       let bool = false;
       this.tableData.forEach(element => {
         if (element.name === formName) {
-          bool =  true;
+          bool = true;
         }
       });
        return bool;
