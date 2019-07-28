@@ -35,12 +35,17 @@ export default new Router({
         {
           path: '/parking-lots-management',
           meta: { id: 'parking-lots-management' },
-          component: () => import('./views/ParkingLotsManagement/Index.vue')
+          component: () => import('./views/ParkingLotsManagement')
         },
         {
           path: '/users',
           meta: { id: 'users' },
           component: () => import('./views/User.vue')
+        },
+        {
+          path: '/parking-boys',
+          meta: { id: '停车员管理' },
+          component: () => import('./views/ParkingBoysManage')
         }
       ]
     },

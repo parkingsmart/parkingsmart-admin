@@ -38,7 +38,8 @@ export default {
         { id: "about", navIcon: "tachometer-alt", path: "/about" },
         { id: "orderlist", navIcon: "tachometer-alt", path: "/orderlist" },
         { id: "停车场管理", navIcon: "tachometer-alt", path: "/parking-lots-management" },
-        { id: "用户管理", navIcon: "tachometer-alt", path: "/users" }
+        { id: "用户管理", navIcon: "tachometer-alt", path: "/users" },
+        { id: "停车员管理", navIcon: "tachometer-alt", path: "/parking-boys" }
       ]
     };
   }
