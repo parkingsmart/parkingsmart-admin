@@ -31,7 +31,7 @@
       <el-table-column label="姓名" prop="name"></el-table-column>
       <el-table-column label="email" prop="email"></el-table-column>
       <el-table-column label="电话号码" prop="phone"></el-table-column>
-      <el-table-column label="职业" prop="office_id"></el-table-column>
+      <el-table-column label="职业" prop="officeId"></el-table-column>
       <el-table-column align="right">
         <template slot="header">
           <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
@@ -61,7 +61,7 @@ export default {
       name: "",
       email: "",
       phone: "",
-      office_id: "停车员",
+      officeId: "",
       total: 1,
       pagesize: 10,
       currentPage: 1,
@@ -71,7 +71,15 @@ export default {
   },
   computed: {
     users() {
-      return this.$store.getters.getUsers;
+      var users = this.$store.getters.getUsers;
+      for(var user of users) {
+        if(user.officeId === 0){
+          user.officeId = "停车员";
+        }else{
+           user.officeId = "经理";
+        }
+      }
+      return users;
     }
   },
   async created() {
@@ -92,8 +100,8 @@ export default {
         name: this.name,
         email: this.email,
         phone: this.phone,
-        office_id: "停车员"
       };
+      
       await this.$store.dispatch("addUser", user);
 
       (this.name = ""),
