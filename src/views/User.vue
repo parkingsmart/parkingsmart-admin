@@ -111,8 +111,8 @@ export default {
   },
   computed: {
     users() {
-      var users = this.$store.getters.getUsers;
-      for (var user of users) {
+      let users = this.$store.getters.getUsers;
+      for (let user of users) {
         if (user.officeId === 0) {
           user.officeId = "停车员";
         } else if (user.officeId === 1) {
@@ -140,7 +140,7 @@ export default {
 
     async edit() {
       console.log(this.id);
-      var office;
+      let office;
       if (this.officeId === "停车员") {
         office = 0;
       }
@@ -152,7 +152,7 @@ export default {
         office = 2;
       }
 
-      var user = {
+      let user = {
         name: this.name,
         email: this.email,
         phone: this.phone,
@@ -181,7 +181,7 @@ export default {
           type: "warning"
         });
       } else {
-        var user = {
+        let user = {
           name: this.name,
           email: this.email,
           phone: this.phone

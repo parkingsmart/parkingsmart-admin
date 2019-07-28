@@ -56,7 +56,7 @@ export default {
   name: "parking-lots-header",
   props: ["tableData"],
   data() {
-    var validateName = (rule, value, callback) => {
+    let validateName = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入停车场名字"));
       } else if (this.isNameIncluded(value)) {
@@ -65,7 +65,7 @@ export default {
         callback();
       }
     };
-    var validateSize = (rule, value, callback) => {
+    let validateSize = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入停车场容量"));
       } else if (!this.isSizeValid(value)) {
