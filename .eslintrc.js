@@ -13,7 +13,8 @@ module.exports = {
     semi: ["error", "always"],
     'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 1 }],
     "space-infix-ops": ["error", {"int32Hint": true}],
-    eqeqeq: ["error", "always"]
+    eqeqeq: ["error", "always"],
+    "indent": ["error", 2]
   },
   parserOptions: {
     parser: 'babel-eslint'

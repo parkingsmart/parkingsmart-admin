@@ -46,7 +46,7 @@ class RequestHandler {
     let loading = null;
 
     if (this[_option].showLoading) {
-        loading = Loading.service(this[_option].loadingOption);
+      loading = Loading.service(this[_option].loadingOption);
     }
 
     try {
@@ -57,7 +57,7 @@ class RequestHandler {
       this[_errorHandle](err);
     } finally {
       if (this[_option].showLoading) {
-          loading.close();
+        loading.close();
       }
     }
 

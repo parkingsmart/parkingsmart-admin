@@ -131,12 +131,12 @@ export default {
   computed: {
     parkingLots() {
       return this.allParkingLots
-      .filter(parkingLot => !parkingLot.manager || (this.expands.length && parkingLot.manager === this.expands[0]))
-      .map(parkingLot => {
-        let o = Object.assign({}, parkingLot);
-        o.label = `${parkingLot.name} (${parkingLot.size})`; 
-        return o;
-      });
+        .filter(parkingLot => !parkingLot.manager || (this.expands.length && parkingLot.manager === this.expands[0]))
+        .map(parkingLot => {
+          let o = Object.assign({}, parkingLot);
+          o.label = `${parkingLot.name} (${parkingLot.size})`; 
+          return o;
+        });
     }
   }
 };

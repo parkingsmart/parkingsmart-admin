@@ -191,9 +191,9 @@ export default {
           .loading()
           .exec();
         (this.name = ""),
-          (this.email = ""),
-          (this.phone = ""),
-          (this.dialogFormVisible = false);
+        (this.email = ""),
+        (this.phone = ""),
+        (this.dialogFormVisible = false);
       }
     },
     async fetchAll() {
