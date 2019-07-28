@@ -20,15 +20,18 @@
     </el-dialog>
 
     <el-table
-      :data="users.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe
+      :data="users.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+      stripe
       style="width: 100%"
     >
       <el-button>Add</el-button>
-      <el-table-column label="id" prop="id"></el-table-column>
+      <el-table-column label="id" width="200px">
+        <template slot-scope="scope">{{scope.$index+1}}</template>
+      </el-table-column>
       <el-table-column label="姓名" prop="name"></el-table-column>
       <el-table-column label="email" prop="email"></el-table-column>
       <el-table-column label="电话号码" prop="phone"></el-table-column>
-      <el-table-column label="职业" prop="career"></el-table-column>
+      <el-table-column label="职业" prop="office_id"></el-table-column>
       <el-table-column align="right">
         <template slot="header">
           <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
@@ -43,7 +46,7 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total= "users.length"
+      :total="users.length"
       @current-change="current_change"
     ></el-pagination>
   </div>
@@ -55,11 +58,10 @@ export default {
     return {
       search: "",
       dialogFormVisible: false,
-
       name: "",
       email: "",
       phone: "",
-      career: "停车员",
+      office_id: "停车员",
       total: 1,
       pagesize: 10,
       currentPage: 1,
@@ -72,11 +74,9 @@ export default {
       return this.$store.getters.getUsers;
     }
   },
-
-  async created () {
+  async created() {
     await this.fetchAll();
   },
-
   methods: {
     handleEdit(index, row) {
       console.log(index, row);
@@ -88,21 +88,21 @@ export default {
       this.currentPage = currentPage;
     },
     async add() {
-      let user = {
-        id: this.users.length+1,
+      var user = {
         name: this.name,
         email: this.email,
         phone: this.phone,
-        career: "停车员"
+        office_id: "停车员"
       };
-      await this.$store.dispatch('addUser', user);
-      this.name = "",
-        this.email = "",
-        this.phone = "",
-        this.dialogFormVisible = false;
+      await this.$store.dispatch("addUser", user);
+
+      (this.name = ""),
+        (this.email = ""),
+        (this.phone = ""),
+        (this.dialogFormVisible = false);
     },
-    async fetchAll () {
-      await this.$store.dispatch('fetchAllUsers');
+    async fetchAll() {
+      await this.$store.dispatch("fetchAllUsers");
     }
   }
 };
