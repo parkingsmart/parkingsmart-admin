@@ -33,8 +33,8 @@
           <el-form-item label="停车场名字" prop="name">
             <el-input type="text" v-model="ruleForm.name" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="停车场容量" prop="capacity">
-            <el-input type="text" v-model="ruleForm.capacity" autocomplete="off"></el-input>
+          <el-form-item label="停车场容量" prop="size">
+            <el-input type="text" v-model="ruleForm.size" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import parkingLotApi from "../../../apis/parkingLot.js";
+import requestHandler from "../../../utils/requestHandler.js";
 export default {
   name: "parking-lots-header",
   data() {
@@ -60,7 +62,7 @@ export default {
         callback();
       }
     };
-    var validateCapacity = (rule, value, callback) => {
+    var validateSize = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入停车场容量"));
       } else {
@@ -72,22 +74,34 @@ export default {
       value: "",
       ruleForm: {
         name: "",
-        capacity: ""
+        size: ""
       },
       checked: false,
       options: [{ value: 1, label: 1 }],
       dialogVisible: false,
       rules: {
         name: [{ validator: validateName, trigger: "blur" }],
-        capacity: [{ validator: validateCapacity, trigger: "blur" }]
+        size: [{ validator: validateSize, trigger: "blur" }]
       }
     };
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
           this.dialogVisible = false;
+          let data = {
+            name: this.ruleForm.name,
+            size: this.ruleForm.size,
+            active: true,
+            parkedNum: 0
+          };
+          await requestHandler
+            .invoke(parkingLotApi.postAParkingLot(data))
+            .loading()
+            .exec();
+          this.$emit("refreshTableData");
+          this.$refs[formName].resetFields();
         } else {
           console.log("error submit!!");
           return false;
