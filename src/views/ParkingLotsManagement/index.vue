@@ -13,8 +13,8 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="editParkingLot(scope.$index, scope.row)">{{ (scope.$index===currIndex)? '完成':'修改' }}</el-button>
-            <el-button size="mini" @click="logoutParkingLot(scope.$index, scope.row)">注销</el-button>
+            <el-button size="mini" :disabled="!scope.row.active" @click="editParkingLot(scope.$index, scope.row)">{{ (scope.$index===currIndex)? '完成':'修改' }}</el-button>
+            <el-button size="mini" :disabled="!scope.row.active" @click="logoutParkingLot(scope.$index, scope.row)">注销</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -76,15 +76,15 @@ export default {
         this.isEdit = false;
         this.currIndex = -1;
         this.tableData[index].size = 0;
-        if(Number.isInteger(this.sizeInput)){
-          this.tableData[index].size = this.sizeInput;
+        if(Number.isInteger(Number(this.sizeInput))){
+          this.tableData[index].size = Number(this.sizeInput);
         }
         this.putAParkingLotInfo(data);
         this.sizeInput = "";
       }
     },
     logoutParkingLot(index, data) {
-      data.active = true;
+      data.active = false;
       this.putAParkingLotInfo(data);
     },
     async putAParkingLotInfo(data) {
