@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-button @click="dialogFormVisible = true">Add</el-button>
-    <el-dialog title="添加信息" :visible.sync="dialogFormVisible">
+    <el-button @click="dialogFormVisible = true" class="userBtn">Add</el-button>
+
+    <el-dialog title="添加信息" :visible.sync="dialogFormVisible" width='30%' center="true">
       <el-form>
         <el-form-item label="姓名" :label-width="formLabelWidth">
           <el-input v-model="name" autocomplete="off"></el-input>
@@ -52,7 +53,7 @@
   </div>
 </template>
 <script>
-import RequestHadler from '../utils/requestHandler';
+import RequestHadler from "../utils/requestHandler";
 export default {
   data() {
     return {
@@ -66,17 +67,17 @@ export default {
       pagesize: 10,
       currentPage: 1,
 
-      formLabelWidth: "120px"
+      formLabelWidth: "80px"
     };
   },
   computed: {
     users() {
       var users = this.$store.getters.getUsers;
-      for(var user of users) {
-        if(user.officeId === 0){
+      for (var user of users) {
+        if (user.officeId === 0) {
           user.officeId = "停车员";
-        }else{
-           user.officeId = "经理";
+        } else {
+          user.officeId = "经理";
         }
       }
       return users;
@@ -99,11 +100,12 @@ export default {
       var user = {
         name: this.name,
         email: this.email,
-        phone: this.phone,
+        phone: this.phone
       };
-      
-      await RequestHadler.invoke(this.$store.dispatch("addUser", user)).msg("添加成功","添加失败").loading().exec();
-
+      await RequestHadler.invoke(this.$store.dispatch("addUser", user))
+        .msg("添加成功", "添加失败")
+        .loading()
+        .exec();
       (this.name = ""),
         (this.email = ""),
         (this.phone = ""),
@@ -117,4 +119,10 @@ export default {
 </script>
 
 <style scoped>
+.userBtn {
+  float: left;
+  background-color: #409eff;
+  color: white;
+  margin: 20px;
+}
 </style>
