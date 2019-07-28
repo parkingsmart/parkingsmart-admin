@@ -44,7 +44,7 @@ import parkingLotApi from "../../apis/parkingLot.js";
 import requestHandler from "../../utils/requestHandler.js";
 import ParkingLotsHeader from "./components/ParkingLotsHeader.vue";
 export default {
-  name: "parking-lots-management",
+  name: "parking-lots",
   components: {
     ParkingLotsHeader
   },
@@ -128,5 +128,8 @@ export default {
 <style>
 .el-table .log-out-parking-lot {
   color:#999;
+}
+.block {
+  margin: 20px;
 }
 </style>` `

@@ -33,8 +33,8 @@ export default new Router({
           component: () => import('./views/OrderPage.vue')
         },
         {
-          path: '/parking-lots-management',
-          meta: { id: 'parking-lots-management' },
+          path: '/parking-lots',
+          meta: { id: 'parking-lots' },
           component: () => import('./views/ParkingLotsManagement')
         },
         {
