@@ -20,6 +20,7 @@
             >{{ (scope.$index===currIndex)? '完成':'修改' }}</el-button>
             <el-button
               size="mini"
+              type="danger"
               :disabled="!scope.row.active"
               @click="logoutParkingLot(scope.$index, scope.row)"
             >注销</el-button>

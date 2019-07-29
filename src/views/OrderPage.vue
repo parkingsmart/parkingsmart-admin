@@ -21,7 +21,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="{row}">
-          <el-button type="text" v-if="row.status===0">指派</el-button>
+          <el-button size="mini" v-if="row.status===0">指派</el-button>
         </template>
       </el-table-column>
     </el-table>
