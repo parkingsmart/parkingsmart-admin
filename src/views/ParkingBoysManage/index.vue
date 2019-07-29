@@ -8,7 +8,6 @@
 
     <div class="tab-box">
       <el-table
-        border
         :data="tableData"
         style="width: 100%"
         @expand-change="openTransfer"

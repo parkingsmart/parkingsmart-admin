@@ -51,14 +51,14 @@
       style="width: 100%"
     >
       <el-button>Add</el-button>
-      <el-table-column label="id" width="200px">
+      <el-table-column align="center" label="id" width="200px">
         <template slot-scope="scope">{{scope.$index+1}}</template>
       </el-table-column>
-      <el-table-column label="姓名" prop="name"></el-table-column>
-      <el-table-column label="email" prop="email"></el-table-column>
-      <el-table-column label="电话号码" prop="phone"></el-table-column>
-      <el-table-column label="职业" prop="officeId"></el-table-column>
-      <el-table-column label="操作" align="left">
+      <el-table-column align="center" label="姓名" prop="name"></el-table-column>
+      <el-table-column align="center" label="email" prop="email"></el-table-column>
+      <el-table-column align="center" label="电话号码" prop="phone"></el-table-column>
+      <el-table-column align="center" label="职业" prop="officeId"></el-table-column>
+      <el-table-column align="center" label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">修 改</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">注 销</el-button>

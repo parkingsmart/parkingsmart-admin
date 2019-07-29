@@ -3,15 +3,15 @@
     <div>
       <ParkingLotsHeader :tableData=tableData @refreshTableData="handleAddChange"></ParkingLotsHeader>
       <el-table :data="tableData" :row-class-name="tableRowClassName" :highlight-current-row="true">
-        <el-table-column prop="id" label="id"></el-table-column>
-        <el-table-column prop="name" label="名字"></el-table-column>
-        <el-table-column prop="size" label="大小">
+        <el-table-column align="center" prop="id" label="id"></el-table-column>
+        <el-table-column align="center" prop="name" label="名字"></el-table-column>
+        <el-table-column align="center" prop="size" label="大小">
           <template slot-scope="scope">
             <input v-if="scope.$index===currIndex" v-model="sizeInput" style="width:100px" />
             <span v-else>{{ tableData[scope.$index].size }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button
               size="mini"

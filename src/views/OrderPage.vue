@@ -2,24 +2,23 @@
   <div class="about">
     <el-table
       :data="orders"
-      border
       :highlight-current-row="true"
       style="width: 100%"
       :default-sort="{prop:'id'}"
     >
-      <el-table-column prop="id" label="id"></el-table-column>
-      <el-table-column prop="carNumebr" label="车牌号"></el-table-column>
-      <el-table-column prop="type" label="类型">
+      <el-table-column align="center" prop="id" label="id"></el-table-column>
+      <el-table-column align="center" prop="carNumebr" label="车牌号"></el-table-column>
+      <el-table-column align="center" prop="type" label="类型">
         <template slot-scope="{row}">
           <span>{{ getType(row.type) }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="status" label="状态">
+      <el-table-column align="center" prop="status" label="状态">
         <template slot-scope="{row}">
           <span>{{ getStatus(row.status) }}</span>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="操作">
+      <el-table-column align="center" fixed="right" label="操作">
         <template slot-scope="{row}">
           <el-button size="mini" v-if="row.status===0">指派</el-button>
         </template>
