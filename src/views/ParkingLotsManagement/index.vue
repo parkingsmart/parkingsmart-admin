@@ -5,7 +5,7 @@
       <el-table :data="tableData" :row-class-name="tableRowClassName" :highlight-current-row="true">
         <el-table-column align="center" prop="id" label="id"></el-table-column>
         <el-table-column align="center" prop="name" label="名字"></el-table-column>
-        <el-table-column align="center" prop="size" label="大小">
+        <el-table-column align="center" prop="size" label="容量">
           <template slot-scope="scope">
             <input v-if="scope.$index===currIndex" v-model="sizeInput" style="width:100px" />
             <span v-else>{{ tableData[scope.$index].size }}</span>
@@ -132,7 +132,7 @@ export default {
 </script>
 <style>
 .el-table .log-out-parking-lot {
-  color: #999;
+  color: rgb(204, 194, 194);
 }
 .block {
   margin: 20px;
