@@ -50,12 +50,12 @@ export default {
     };
   },
   async created() {
-    this.requestOrder(1,true);
+    this.requestOrder(1);
   },
   methods: {
     handleCurrentChange(cpage) {
       this.currpage = cpage;
-      this.requestOrder(cpage,false);
+      this.requestOrder(cpage);
     },
     getType(type) {
       return type === 1 ? "取车" : "存车";
@@ -63,22 +63,15 @@ export default {
     getStatus(status) {
       return status === 2 ? "已完成" : status === 1 ? "存取中" : "无人处理";
     },
-    async requestOrder(page, isFirst) {
-      let response;
-      if (isFirst) {
-        response = await RequestHandler.invoke(OrderPageApi.getAllOrders())
-          .msg()
-          .loading()
-          .exec();
-      } else {
-        response = await RequestHandler.invoke(OrderPageApi.getAllOrders(page))
-          .msg()
-          .loading()
-          .exec();
-      }
-      this.orders = response.pageOrders;
+    async requestOrder(page) {
+      const response = await RequestHandler.invoke(
+        OrderPageApi.getAllOrders(page)
+      )
+        .msg()
+        .loading()
+        .exec();
+      this.orders = response.orders;
       this.number = response.AllOrdersNum;
-      console.log(response);
     }
   }
 };
