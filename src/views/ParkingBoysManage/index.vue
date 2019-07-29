@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     async refreshPage() {
-      const data = await userApi.getPage(this.page, this.pageSize);
+      const data = await userApi.getParkingBoyPage(this.page, this.pageSize);
       this.count = data.totalElements;
       this.tableData = data.content;
     },
