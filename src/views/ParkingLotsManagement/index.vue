@@ -33,6 +33,7 @@
           :total="totalItem"
           @current-change="handleCurrentChange"
           :current-page="currPage"
+          layout="prev, pager, next"
         ></el-pagination>
       </div>
     </div>

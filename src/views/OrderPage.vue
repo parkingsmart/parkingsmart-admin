@@ -5,10 +5,7 @@
       border
       :highlight-current-row="true"
       style="width: 100%"
-      :row-style="{'font-size':'14px', height:'65px'}"
       :default-sort="{prop:'id'}"
-      :header-cell-style="{color:'black', 'font-size':'16px', 'padding-left':'10px'}"
-      :cell-style="{'padding-left':'10px'}"
     >
       <el-table-column prop="id" label="id"></el-table-column>
       <el-table-column prop="carNumebr" label="车牌号"></el-table-column>
@@ -29,6 +26,7 @@
       </el-table-column>
     </el-table>
     <el-pagination
+      style="margin: 20px"
       background
       layout="prev, pager, next"
       @current-change="handleCurrentChange"

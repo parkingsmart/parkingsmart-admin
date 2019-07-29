@@ -62,7 +62,7 @@
         :current-page.sync="page"
         @current-change="pageChange"
         @size-change="pageSizeChange"
-        layout="sizes, prev, pager, next"
+        layout="prev, pager, next"
       />
     </div>
   </div>
@@ -153,5 +153,9 @@ export default {
     align-items: center;
     justify-content: center;
   }
+}
+
+.page-box {
+  margin: 20px;
 }
 </style>

@@ -11,7 +11,7 @@
           >新建</el-button>
         </el-col>
         <el-col :span="8" :offset="13">
-          <div class="parking-lots-header-search">
+          <!-- <div class="parking-lots-header-search">
             <el-select v-model="value" placeholder="选项一" style="width:150px">
               <el-option
                 v-for="item in options"
@@ -23,7 +23,7 @@
             <el-input v-model="input" style="width:150px"></el-input>
             <el-button type="primary" size="medium " suffix-icon="el-icon-search">搜索</el-button>
             <el-checkbox v-model="checked" label="复合搜索" border></el-checkbox>
-          </div>
+          </div> -->
         </el-col>
       </el-row>
     </div>
