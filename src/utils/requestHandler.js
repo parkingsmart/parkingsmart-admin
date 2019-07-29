@@ -54,6 +54,9 @@ class RequestHandler {
       this[_successHandle]();
     } catch (err) {
       error = err;
+      if (error && error.response && error.response.data && typeof(error.response.data) === 'string') {
+        error.message = error.response.data;
+      }
       this[_errorHandle](err);
     } finally {
       if (this[_option].showLoading) {
