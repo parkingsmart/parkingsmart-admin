@@ -11,7 +11,7 @@ const addUser = (user) => {
 };
 
 const editCareer = async (id,user) => {
-  return axios.put(baseUrl + "/" + id,user);
+  return axios.put(`${baseUrl}/${id}`,user);
 };
 
 const getParkingBoyPage = (page, pageSize = 10) => {

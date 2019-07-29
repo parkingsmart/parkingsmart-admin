@@ -89,10 +89,6 @@ export default {
         {
           value: "经理",
           label: "经理"
-        },
-        {
-          value: "管理员",
-          label: "管理员"
         }
       ],
       search: "",
@@ -115,10 +111,8 @@ export default {
       for (let user of users) {
         if (user.officeId === 0) {
           user.officeId = "停车员";
-        } else if (user.officeId === 1) {
-          user.officeId = "经理";
         } else {
-          user.officeId = "管理员";
+          user.officeId = "经理";
         }
       }
       return users;
@@ -147,11 +141,6 @@ export default {
       if (this.officeId === "经理") {
         office = 1;
       }
-
-      if (this.officeId === "管理员") {
-        office = 2;
-      }
-
       let user = {
         name: this.name,
         email: this.email,
@@ -160,6 +149,9 @@ export default {
       };
       await userApi.editCareer(this.id, user);
       this.$store.dispatch("fetchAllUsers");
+      (this.name = ""),
+      (this.email = ""),
+      (this.phone = ""),
       this.dialogFormVisible1 = false;
     },
 
