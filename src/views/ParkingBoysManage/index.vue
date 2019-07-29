@@ -1,9 +1,7 @@
 <template>
   <div class="container">
-    <div class="btn-box">
-      <div class="in-btn">
-        <el-button type="primary">创建</el-button>
-      </div>
+    <div>
+      <el-button @click="dialogFormVisible = true" class="userBtn">Add</el-button>
     </div>
 
     <div class="tab-box">
@@ -151,6 +149,14 @@ export default {
 }
 
 .page-box {
+  margin: 20px;
+  text-align: center;
+}
+
+.userBtn {
+  float: left;
+  background-color: #409eff;
+  color: white;
   margin: 20px;
 }
 </style>

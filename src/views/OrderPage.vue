@@ -25,7 +25,7 @@
       </el-table-column>
     </el-table>
     <el-pagination
-      style="margin: 20px"
+      style="margin: 20px;text-align: center;"
       background
       layout="prev, pager, next"
       @current-change="handleCurrentChange"

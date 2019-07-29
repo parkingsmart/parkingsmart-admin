@@ -133,5 +133,6 @@ export default {
 }
 .block {
   margin: 20px;
+  text-align: center;
 }
 </style>` `

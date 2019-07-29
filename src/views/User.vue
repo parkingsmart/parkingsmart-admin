@@ -44,7 +44,7 @@
       </div>
     </el-dialog>
 
-    <el-input class="searchUser" v-model="search" size="medium" placeholder="输入关键字搜索" />
+    <!-- <el-input class="searchUser" v-model="search" size="medium" placeholder="输入关键字搜索" /> -->
     <el-table
       :data="users.slice((currentPage-1)*pagesize,currentPage*pagesize)"
       stripe
@@ -67,7 +67,7 @@
     </el-table>
 
     <el-pagination
-      style="margin-top:20px"
+      style="margin-top:20px;text-align:center;"
       background
       layout="prev, pager, next"
       :total="users.length"
