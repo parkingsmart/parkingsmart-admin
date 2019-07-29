@@ -35,7 +35,11 @@
         <el-table-column align="center" prop="id" label="id"/>
         <el-table-column align="center" prop="name" label="姓名" />
         <el-table-column align="center" prop="phone" label="电话" />
-        <el-table-column align="center" prop="isWork" label="状态" />
+        <el-table-column align="center" prop="isWork" label="状态">
+          <template slot-scope="props">
+            <span v-text="props.row.work ? '上班' : '下班'" />
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="120" align="center">
           <template>
             <el-tooltip effect="dark" content="编辑" placement="top">
