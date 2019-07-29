@@ -29,17 +29,17 @@ export default new Router({
         },
         {
           path: '/orderlist',
-          meta: { id: 'orderlist' },
+          meta: { id: '订单管理' },
           component: () => import('./views/OrderPage.vue')
         },
         {
           path: '/parking-lots',
-          meta: { id: 'parking-lots' },
+          meta: { id: '停车场管理' },
           component: () => import('./views/ParkingLotsManagement')
         },
         {
           path: '/users',
-          meta: { id: 'users' },
+          meta: { id: '用户管理' },
           component: () => import('./views/User.vue')
         },
         {
