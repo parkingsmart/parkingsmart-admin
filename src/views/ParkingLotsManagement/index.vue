@@ -3,15 +3,15 @@
     <div>
       <ParkingLotsHeader :tableData=tableData @refreshTableData="handleAddChange"></ParkingLotsHeader>
       <el-table :data="tableData" :row-class-name="tableRowClassName" :highlight-current-row="true">
-        <el-table-column prop="id" label="id"></el-table-column>
-        <el-table-column prop="name" label="名字"></el-table-column>
-        <el-table-column prop="size" label="大小">
+        <el-table-column align="center" prop="id" label="id"></el-table-column>
+        <el-table-column align="center" prop="name" label="名字"></el-table-column>
+        <el-table-column align="center" prop="size" label="大小">
           <template slot-scope="scope">
             <input v-if="scope.$index===currIndex" v-model="sizeInput" style="width:100px" />
             <span v-else>{{ tableData[scope.$index].size }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -20,6 +20,7 @@
             >{{ (scope.$index===currIndex)? '完成':'修改' }}</el-button>
             <el-button
               size="mini"
+              type="danger"
               :disabled="!scope.row.active"
               @click="logoutParkingLot(scope.$index, scope.row)"
             >注销</el-button>
@@ -33,6 +34,7 @@
           :total="totalItem"
           @current-change="handleCurrentChange"
           :current-page="currPage"
+          layout="prev, pager, next"
         ></el-pagination>
       </div>
     </div>
@@ -131,5 +133,6 @@ export default {
 }
 .block {
   margin: 20px;
+  text-align: center;
 }
 </style>` `

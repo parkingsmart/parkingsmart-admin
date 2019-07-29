@@ -35,11 +35,10 @@ export default {
   data() {
     return {
       routers: [
-        { id: "about", navIcon: "tachometer-alt", path: "/about" },
-        { id: "orderlist", navIcon: "tachometer-alt", path: "/orderlist" },
-        { id: "停车场管理", navIcon: "tachometer-alt", path: "/parking-lots" },
-        { id: "用户管理", navIcon: "tachometer-alt", path: "/users" },
-        { id: "停车员管理", navIcon: "tachometer-alt", path: "/parking-boys" }
+        { id: "订单管理", navIcon: "tachometer-alt", path: "/orderlist" },
+        { id: "停车场管理", navIcon: "car", path: "/parking-lots" },
+        { id: "用户管理", navIcon: "user-tie", path: "/users" },
+        { id: "停车员管理", navIcon: "user-friends", path: "/parking-boys" }
       ]
     };
   }

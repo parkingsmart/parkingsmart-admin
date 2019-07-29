@@ -1,14 +1,11 @@
 <template>
   <div class="container">
-    <div class="btn-box">
-      <div class="in-btn">
-        <el-button type="primary">创建</el-button>
-      </div>
+    <div>
+      <el-button @click="dialogFormVisible = true" class="userBtn">Add</el-button>
     </div>
 
     <div class="tab-box">
       <el-table
-        border
         :data="tableData"
         style="width: 100%"
         @expand-change="openTransfer"
@@ -35,15 +32,15 @@
         <el-table-column align="center" prop="id" label="id"/>
         <el-table-column align="center" prop="name" label="姓名" />
         <el-table-column align="center" prop="phone" label="电话" />
-        <el-table-column align="center" prop="isWork" label="状态" />
-        <el-table-column label="操作" width="120" align="center">
+        <el-table-column align="center" prop="isWork" label="状态">
+          <template slot-scope="props">
+            <span v-text="props.row.work ? '上班' : '下班'" />
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" align="center">
           <template>
-            <el-tooltip effect="dark" content="编辑" placement="top">
-              <el-button plain circle size="mini" icon="el-icon-edit"/>
-            </el-tooltip>
-            <el-tooltip effect="dark" content="删除" placement="top">
-              <el-button type="danger" plain circle size="mini" icon="el-icon-delete"/>
-            </el-tooltip>
+            <el-button size="mini">修改</el-button>
+            <el-button type="danger" size="mini">注销</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -58,7 +55,7 @@
         :current-page.sync="page"
         @current-change="pageChange"
         @size-change="pageSizeChange"
-        layout="sizes, prev, pager, next"
+        layout="prev, pager, next"
       />
     </div>
   </div>
@@ -88,7 +85,7 @@ export default {
   },
   methods: {
     async refreshPage() {
-      const data = await userApi.getPage(this.page, this.pageSize);
+      const data = await userApi.getParkingBoyPage(this.page, this.pageSize);
       this.count = data.totalElements;
       this.tableData = data.content;
     },
@@ -149,5 +146,17 @@ export default {
     align-items: center;
     justify-content: center;
   }
+}
+
+.page-box {
+  margin: 20px;
+  text-align: center;
+}
+
+.userBtn {
+  float: left;
+  background-color: #409eff;
+  color: white;
+  margin: 20px;
 }
 </style>

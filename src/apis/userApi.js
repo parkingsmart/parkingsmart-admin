@@ -14,11 +14,12 @@ const editCareer = async (id,user) => {
   return axios.put(`${baseUrl}/${id}`,user);
 };
 
-const getPage = (page, pageSize = 10) => {
+const getParkingBoyPage = (page, pageSize = 10) => {
   return axios.get(baseUrl, {
     params: {
       page,
-      pageSize
+      pageSize,
+      officeId: 0
     }
   });
 };
@@ -39,7 +40,7 @@ export default {
   fetchUsers,
   addUser,
   editCareer,
-  getPage,
+  getParkingBoyPage,
   getParkingLotsByUserId,
   appointParkingLots,
   leavingParkingLots
