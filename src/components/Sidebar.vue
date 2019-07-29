@@ -37,7 +37,7 @@ export default {
       routers: [
         { id: "订单管理", navIcon: "tachometer-alt", path: "/orderlist" },
         { id: "停车场管理", navIcon: "car", path: "/parking-lots" },
-        { id: "用户管理", navIcon: "user-tie", path: "/users" },
+        { id: "员工管理", navIcon: "user-tie", path: "/users" },
         { id: "停车员管理", navIcon: "user-friends", path: "/parking-boys" }
       ]
     };

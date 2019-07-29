@@ -39,7 +39,7 @@ export default new Router({
         },
         {
           path: '/users',
-          meta: { id: '用户管理' },
+          meta: { id: '员工管理' },
           component: () => import('./views/User.vue')
         },
         {
