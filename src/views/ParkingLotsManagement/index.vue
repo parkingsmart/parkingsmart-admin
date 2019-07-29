@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <ParkingLotsHeader :tableData=tableData @refreshTableData="handleAddChange"></ParkingLotsHeader>
+      <ParkingLotsHeader :tableData="tableData" @refreshTableData="handleAddChange"></ParkingLotsHeader>
       <el-table :data="tableData" :row-class-name="tableRowClassName" :highlight-current-row="true">
         <el-table-column align="center" prop="id" label="id"></el-table-column>
         <el-table-column align="center" prop="name" label="名字"></el-table-column>
@@ -52,7 +52,7 @@ export default {
   },
   async created() {
     const tableData = await requestHandler
-      .invoke(parkingLotApi.getAll())
+      .invoke(parkingLotApi.getByPage(this.initPage))
       .loading()
       .exec();
     this.tableData = tableData.AllParkingLot;
@@ -60,6 +60,7 @@ export default {
   },
   data() {
     return {
+      initPage: 1,
       tableData: [],
       isEdit: false,
       sizeInput: "",
@@ -107,7 +108,7 @@ export default {
     async handleCurrentChange(page) {
       this.currPage = page;
       const tableData = await requestHandler
-        .invoke(parkingLotApi.getAll(page))
+        .invoke(parkingLotApi.getByPage(page))
         .loading()
         .exec();
       this.tableData = tableData.AllParkingLot;
@@ -116,7 +117,9 @@ export default {
     async handleAddChange() {
       const tableData = await requestHandler
         .invoke(
-          parkingLotApi.getAll(Math.ceil((this.totalItem + 1) / this.pageSize))
+          parkingLotApi.getByPage(
+            Math.ceil((this.totalItem + 1) / this.pageSize)
+          )
         )
         .loading()
         .exec();
@@ -129,7 +132,7 @@ export default {
 </script>
 <style>
 .el-table .log-out-parking-lot {
-  color:#999;
+  color: #999;
 }
 .block {
   margin: 20px;
