@@ -1,6 +1,6 @@
 import axios from './base.js';
 
-const baseUrl = '/api/users';
+const baseUrl = '/api/employees';
 
 const fetchUsers = async () => {
   return axios.get(baseUrl);
